@@ -9,31 +9,39 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     String TAG="Home page";
     TextView textView;
+    Button signIn, signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = (TextView)findViewById(R.id.textView);
+        textView = (TextView) findViewById(R.id.textView);
 
-        Button signup = findViewById(R.id.signup);
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                textView.setText("Awesome, you signed up");
-                Toast.makeText(signup.getContext(),"You clicked signup ", Toast.LENGTH_SHORT).show();
-                Log.i(TAG," clicked signup");
-            }
-        });
+        signIn = (Button) findViewById(R.id.signIn);
+        signUp = (Button) findViewById(R.id.signup);
+
+        signIn.setOnClickListener(this);
+        signUp.setOnClickListener(this);
     }
 
-    public void signInClicked(View view) {
-        textView.setText("Awesome, you signed in");
-        Toast.makeText(this,"You clicked singin ", Toast.LENGTH_SHORT).show();
-        Log.i(TAG," clicked signin");
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.signIn:
+                Log.d(TAG," clicked signin started");
+                textView.setText("Awesome, you signed in");
+                Toast.makeText(this,"You clicked singin new", Toast.LENGTH_SHORT).show();
+                Log.i(TAG," clicked signin");
+                break;
+            case R.id.signup:
+                textView.setText("Awesome, you signed up");
+                Toast.makeText(this,"You clicked signup new", Toast.LENGTH_SHORT).show();
+                Log.i(TAG," clicked signup");
+                break;
+        }
     }
 }
